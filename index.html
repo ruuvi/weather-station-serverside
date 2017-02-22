@@ -233,8 +233,9 @@
               var uTemp = (((decoded[3] & 127) << 8) | decoded[2]);
               var tempSign = (decoded[3] >> 7) & 1;
               var temp = tempSign === 0 ? uTemp/256.0 : -1 * uTemp/256.0;
+              var tempF = temp * 1.8 + 32;
               var air_pressure = ((decoded[5] << 8) + decoded[4]) + 50000;
-              $("#temperature").text(Math.round(temp));
+              $("#temperature").text(Math.round(temp) + " / " + Math.round(tempF));
               $("#humidity").text(humidity);
               $("#air_pressure").text(air_pressure/100);
           } 
@@ -249,8 +250,9 @@
               var uTemp = (((decoded64[2] & 127) << 8) | decoded64[3]);
               var tempSign = (decoded64[2] >> 7) & 1;
               var temp = tempSign === 0 ? uTemp/256.0 : -1 * uTemp/256.0;
+              var tempF = temp * 1.8 + 32;
               var air_pressure = ((decoded64[4] << 8) + decoded64[5]) + 50000;
-              $("#temperature").text(Math.round(temp));
+              $("#temperature").text(Math.round(temp) + " / " + Math.round(tempF));
               $("#humidity").text(humidity);
               $("#air_pressure").text(air_pressure/100);
           }
@@ -280,7 +282,7 @@
 			<ul class="measurements">
 				<li class="temperature">
 					<div class="measurement"><h3 id="temperature"></h3></div>
-					<div class="info"><p>Temperature<span>&deg;C</span></p></div>
+					<div class="info"><p>Temperature<span>&deg;C / &deg;F</span></p></div>
 				</li>
 				<li class="humidity">
 					<div class="measurement"><h3 id="humidity"></h3></div>
