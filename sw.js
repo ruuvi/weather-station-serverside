@@ -1,18 +1,18 @@
 const CACHE_NAME = 'ruuvi_weather_station_v1';
 
 const urlsToCache = [
-    '/',
-    '/sw.js',
-    '/css/ruu-vi-styles.css',
-    '/js/base64.js',
-    '/js/respond.js',
-    '/images/bg.jpg',
-    '/images/bg-m.jpg',
-    '/images/favicon.ico',
-    '/svg/ruuvi-logo.svg',
-    '/svg/icon-temperature.svg',
-    '/svg/icon-humidity.svg',
-    '/svg/icon-air-pressure.svg',
+    './',
+    './sw.js',
+    './css/ruu-vi-styles.css',
+    './js/base64.js',
+    './js/respond.js',
+    './images/bg.jpg',
+    './images/bg-m.jpg',
+    './images/favicon.ico',
+    './svg/ruuvi-logo.svg',
+    './svg/icon-temperature.svg',
+    './svg/icon-humidity.svg',
+    './svg/icon-air-pressure.svg',
 ];
 
 // Perform install steps
