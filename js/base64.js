@@ -20,7 +20,7 @@ function base64_decode (s)
   }
   // remove/ignore any characters not in the base64 characters list
   //  or the pad character -- particularly newlines
-  base64escape = s.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+  base64escape = s.replace(/[\-\[\]\/\{\}\(\)\*\+\?\\\^\$\|]/g, "\\$&");
   s = s.replace(new RegExp('[^'+base64escape+'=]', 'g'), "");
 
   // replace any incoming padding with a zero pad (the 'A' character is zero)
