@@ -99,7 +99,10 @@
 					
 					<p>For more detailed info on how the Weather Station works, feel free to explore <a href="https://github.com/ruuvi/ruuvitag_fw">the code</a> on our GitHub organization or chat <a href="https://f.ruuvi.com/">on our forum</a>. Everything is open-source and fellow-Ruuvi-hackers are friendly.</p>
 					
-                    <p>Note that currently the Weather Station works only on RuuviTag+ devices.</p>
+                    <p>Weather Station works both on RuuviTag+ and RuuviTag devices, however temperature readings on RuuviTag basic are less accurate, humidity shows 0 and air pressure shows 655 hPa on RuuviTag basic.</p>
+                    <p>Weather station sends rounded sensor values and does not include accelerometer data. Those who want to build their own application can switch to sensortag mode by pressing button "B". Both leds light up on button press
+                       and red led blinks roughly once per second in sensortag mode. Just press button again to return to weather station mode where green led blinks roughly once per five seconds. For more details about sensortag mode
+                       please refer to <a href="https://github.com/ruuvi/sensor-protocol-for-eddystone-url">data format specification</a>.</p>
                     
                     <p>If you're experiencing any problems, check <a href="#troubleshooting">Troubleshooting</a>.</p>
 				</div>
@@ -171,7 +174,7 @@
 					
                     <p><strong>OFFICIAL RUUVI DISTRIBUTION PACKAGES:</strong></p>
 					<ul>
-					    <li><a href="packages/20161230-weather-station.zip">Weather Station</a> (default application)</li>
+					    <li><a href="packages/20170415-weather_station.zip">Weather Station</a> (default application)</li>
 					    <li><a href="packages/20170118-eddystone.zip">Eddystone</a></li>
 					    <li><a href="http://www.espruino.com/binaries/travis/master/">Espruino</a> (download the latest .ZIP file!)</li>
 					</ul>
@@ -210,9 +213,10 @@
                                 <li>Check <a href="https://google.github.io/physical-web/faq">the Physical Web FAQ</a>.</li>
 					        </ol>
 					    </li>
-					    <li>I can't connect to the Weather Station.
+					    <li>I can't connect to the Weather Station / I don't see the URL
 					        <ol>
 					            <li>The Weather Station firmware isn't connectable. It broadcasts only. However, it will gain new features soon.</li>
+                                                    <li>Green led should blink briefy roughly once per 5 seconds. If red led is blinking once per second (once per 5 seconds in basic) you're in sensortag mode, press "B" to return to sensortag mode</li>
 					        </ol>
 					    </li>
 					    <li>I can't enter the bootloader nor update the FW.
