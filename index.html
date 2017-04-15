@@ -219,6 +219,9 @@
      function parseAndDisplayData() {
          if(window.location.hash) {
              var variables = window.location.hash.substr(1);
+             if(variables.length===9){ //Zero-pad URL if needed
+               variables += "...";
+             }
              console.log("parsed hash = " + variables);
              var decoded = base91.decode(variables);
              var decoded64 = base64_decode(variables);
@@ -238,7 +241,7 @@
              let air_pressure = 0;
              let humidity = 0;
 
-             if(2 !== format){
+             if(2 !== format && 4 !== format){
                  humidity = decoded[1] * 0.5;
                  //The bytes are swaped during the encoding, thus read byte 3 as first byte, byte 2 as 2nd
                  //Same goes for pressure and time
