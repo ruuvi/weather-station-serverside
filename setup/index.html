@@ -39,18 +39,14 @@
                 <p>You've entered the RuuviTag configuration page.</p>
                 <p>By following these simple instructions, you can easily set-up your RuuviTag sensor beacon to do many different things.</p>
 
-<p>Right now, we are offering two ready-made firmware applications for you to use:</p>
+<p>Right now, we are offering three ready-made firmware applications for you to use:</p>
 
 <ul>
-    <li><strong>Weather Station</strong> (RuuviTag+ only)</li>
-    <li><strong>Beacon with support for Eddystone™</strong></li>
+    <li><a href="#weather-station">Weather Station</a> (RuuviTag+ only)</li>
+    <li><a href="#eddystone">Eddystone™</a></li>
+    <li><a href="#espruino">Espruino JavaScript interpreter</a></li>
 </ul>
 
-<p>On this site, you can learn what they do and how they can be configured.</p>
-
-<p>If you would like to switch between these applications, read on. It can be done safely over-the-air using your own Android/iOS smart phone. No external programming tools or knowledge are required.</p>
-
-<p>If you’re looking for more advanced instructions and possibilities, scroll down.</p>
 			</div>
 		</div>
 	</div>
@@ -58,53 +54,64 @@
 		<div class="max-width">
 			<div class="aside">
 				<ul class="menu-sub">
-					<li><a href="#weather-station">Weather Station</a></li>
-					<li><a href="#eddystone">Eddystone™</a></li>
+					<li><a href="#getting-started">Getting Started</a></li>
+					<li><a href="#weather-station">App 1: Weather Station</a></li>
+					<li><a href="#eddystone">App 2: Eddystone™</a></li>
+					<li><a href="#espruino">App 3: Espruino</a></li>
 					<li><a href="#updating-the-firmware">Updating the Firmware</a></li>
 					<li><a href="#troubleshooting">Troubleshooting</a></li>
 					<li><a href="#contributing">Contributing</a></li>
 				</ul>
 			</div>
-			<div class="content">
-				<div id="weather-station" class="section">
-					<h2>Weather Station</h2>
 
-                    <p>This super simple but still extremely capable firmware application turns your RuuviTag to a remote <strong>temperature / relative humidity / air pressure</strong> meter.</p>
-					
-					<p>The application will broadcast all these environmental variables continuously (2 times every second) and all the nearby Bluetooth® Low Energy devices can hear them - <strong>without needing to pair or connect</strong>.</p>
-					
-					<p>- How does this work?</p>
-					
-					<p>Good question. We really don’t know.</p>
-					
-					<p>Just kidding. <a href="https://google.github.io/physical-web">The Physical Web</a> is the answer. RuuviTag transmits simple URL addresses which have sensor data encoded into them.</p>
-                    <p>A nearby weather station will show up on your phone’s notification bar and/or can be seen with any Eddystone compatible beacon scanner application.</p>
-					
-					<p>Many Android phones recently gained a new Google Play Service feature called <a href="https://developers.google.com/nearby">Nearby Notifications</a>. It might not work on all phones yet, but don’t worry - Google Chrome has a support feature for The Physical Web too. It might be already enabled on your phone (Android/iOS), but you if you cannot see any notifications, you can make sure it’s on by following <a href="https://google.github.io/physical-web/try-physical-web">these self-explanatory instructions</a>.</p>
-					
-					<p>This is basically how it works:</p>
+			<div class="content">
+				<div id="getting-started" class="section">
+					<h2>Getting Started</h2>
+
+                    <p>RuuviTag works out of the box:</p>
+                    
 					<div class="video">
 						<div class="video-container">
-							<iframe width="853" height="480" src="https://www.youtube.com/embed/3JPeLC8N9HU?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+							<iframe width="853" height="480" src="https://www.youtube.com/embed/NCJYmDuf2Jg?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 						</div>
 					</div>
 					
-					<p>An alternative way to see these readings (and a lot more geeky information) is to use an application called <strong>nRF Connect</strong>. It’s available on both <a href="https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp">Android</a> and <a href="https://itunes.apple.com/us/app/nrf-connect/id1054362403">iOS</a>. Also, other beacon scanners can be used but we love this one (and it’s also used to update the firmware).</p>
-					
-					<p>On many RuuviTag units the Weather Station application is pre-programmed at the factory. For more detailed info on how it works, feel free to explore <a href="https://github.com/ruuvi/ruuvitag_fw">the code</a> on our GitHub organization or chat <a href="https://f.ruuvi.com/">on our forum</a>. Everything is open-source and fellow-Ruuvi-hackers are friendly.</p>
-					
-                    <p>If you’re experiencing any problems, scroll down to <a href="#troubleshooting">Troubleshooting</a> topic.</p>
+                    <p>As you can see, by default, RuuviTag+ is a weather station. However, it's only one of the uses RuuviTag is capable to. Read on to learn more.</p>
+                    <p>Note that RuuviTag Basic devices without sensors come with <a href="#eddystone">Eddystone firmware</a> pre-installed.</p>
 				</div>
+            
+				<div id="weather-station" class="section">
+					<h2>Weather Station</h2>
+
+                    <p>This super simple but still extremely capable firmware application turns your RuuviTag+ to a remote <strong>temperature / relative humidity / air pressure</strong> meter.</p>
+					
+					<p>The application broadcasts all these environmental variables continuously (2 times every second) and all the nearby Bluetooth® Low Energy devices can hear them - <strong>without needing to pair or connect</strong>.</p>
+					
+                    <p>- How is this possible?</p>
+                    
+                    <p><a href="https://google.github.io/physical-web">The Physical Web</a> is the answer. RuuviTag transmits simple URL addresses which have sensor data encoded into them.</p>
+					
+                    <p>Android phones running KitKat (4.4) and above recently gained a feature called <a href="https://developers.google.com/nearby">Nearby Notifications</a>. It helps a nearby Ruuvi Weather Station to show up on your phone's notification bar.</p>
+                    
+                    <p>In addition, also <a href="https://www.google.com/chrome/">Google Chrome</a> (on both Android and iOS) has a support feature for the Physical Web. You can make sure it's on by following <a href="https://google.github.io/physical-web/try-physical-web">these self-explanatory instructions</a>.</p>
+										
+					<p>An alternative way to see these readings is to use a beacon scanner. Many are available and the one we love is <strong>nRF Connect</strong>. It's available on both <a href="https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp">Android</a> and <a href="https://itunes.apple.com/us/app/nrf-connect/id1054362403">iOS</a>. You can also try <a href="https://play.google.com/store/apps/details?id=com.uriio">Beacon Toy</a></p>
+					
+					<p>For more detailed info on how the Weather Station works, feel free to explore <a href="https://github.com/ruuvi/ruuvitag_fw">the code</a> on our GitHub organization or chat <a href="https://f.ruuvi.com/">on our forum</a>. Everything is open-source and fellow-Ruuvi-hackers are friendly.</p>
+					
+                    <p>Note that currently the Weather Station works only on RuuviTag+ devices.</p>
+                    
+                    <p>If you're experiencing any problems, check <a href="#troubleshooting">Troubleshooting</a>.</p>
+				</div>
+
 				<div id="eddystone" class="section">
 					<h2>Eddystone™</h2>
 					
-					<p>RuuviTag has sensors, yes, but it’s also a powerful Bluetooth® proximity beacon.</p>
+					<p>RuuviTag has sensors, yes, but it's also a powerful Bluetooth® proximity beacon.</p>
 					
-                    <p>With <strong>CE/FCC/RoHS/IP67</strong> certifications and <strong>up to 1km</strong> open-air range it’s ready to be used in numerous beacon deployment and industrial-grade solutions.</p>
+                    <p>With <a href="https://github.com/ruuvi/certifications">CE/FCC/RoHS/IP67 certifications</a> and <strong>up to 1km</strong> open-air range it's ready to be used in numerous beacon deployment and industrial-grade solutions.</p>
 					
-                    <p>Eddystone is an open beacon format from Google. This firmware application is fully configurable via <a href="https://github.com/google/eddystone/tree/master/configuration-service">Eddystone Configuration GATT Service</a>.</p>
-					
-					<p>RuuviTag provides full support for Eddystone, including:</p>
+                    <p><a href="https://github.com/google/eddystone">Eddystone</a> is an open beacon format from Google. RuuviTag provides <strong>full support for Eddystone</strong>, including:</p>
 					
 					<ul>
                         <li><strong>The core Eddystone frames: -UID, -TLM, -URL</strong></li>
@@ -112,24 +119,20 @@
                         <li><strong>The Eddystone GATT service, for easy configuration</strong></li>
 					</ul>
 					
-					<p>There are several ways to configure the beacon. For example:</p>
+					<p>There are several ways to configure the beacon:</p>
 					
 					<ul>
 					    <li><a href="http://cf.physical-web.org">Web Bluetooth Configuration Tool</a> (Android | iOS | Desktop)</li>
 					    <li><a href="https://play.google.com/store/apps/details?id=no.nordicsemi.android.nrfbeacon.nearby">nRF Beacon for Eddystone</a> (Android)</li>
 					</ul>
-					
-					<p>To enter configuration mode, press button <strong>B</strong> on your RuuviTag.</p>
-					
+										
 					<p>The default unlock code is: <strong>0x00112233445566778899aabbccddeeff</strong></p>
 					
-					<p>This is how it’s done:</p>
 					<div class="video">
 						<div class="video-container">
-							<iframe width="853" height="480" src="https://www.youtube.com/embed/tO4rg8dRzSg?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+							<iframe width="853" height="480" src="https://www.youtube.com/embed/jznRBmAaymc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 						</div>
-					</div>
-					
+                    </div>
 					
 					<p>An example showing how to use beacons to have some fun:</p>
 					
@@ -139,103 +142,124 @@
 						</div>
 					</div>
 					
-					
-                    <p>If you’re experiencing any problems, scroll down to <a href="#troubleshooting">Troubleshooting</a> topic.</p>
+                    <p>If you're experiencing any problems, check <a href="#troubleshooting">Troubleshooting</a>.</p>
 				</div>
+
+                
+                <div id="espruino" class="section">
+					<h2>Espruino</h2>
+                    <p>Would you like to create something special with your RuuviTags but learning curve to low-level C programming sounds a bit deep? Don't worry. It's possible to tinker with the Tag using <strong>JavaScript</strong>:</p>
+
+					<div class="video">
+						<div class="video-container">
+							<iframe width="853" height="480" src="https://www.youtube.com/embed/VpJ81XWkj88?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>                    
+
+                    <p>RuuviTag is officially supported by Espruino. Read more: <a href="https://www.espruino.com/Ruuvitag">espruino.com/ruuvitag</a>.</p>
+                    <p><a href="https://espruino.com">Espruino</a> is an open-source project. If you run Espruino on RuuviTag and love it, please consider <a href="https://espruino.com/Donate">to donate</a>. They've got also cool hardware products to sell. For example, <a href="http://www.puck-js.com/">Puck.js</a>, which is similar to RuuviTag but with different sensors and properties.</p>
+                    <p>If you're experiencing any problems, check <a href="#troubleshooting">Troubleshooting</a>.</p>
+                </div>
+                    
+                    
 				<div id="updating-the-firmware" class="section">
 					<h2>Updating the Firmware</h2>
 					
-					<p>Every RuuviTag is tested and pre-programmed at the factory. This is what’s included:</p>
+					<p>No external programming tools or any previous knowledge are required to update the firmware. <strong>DFU OTA</strong> (Device Firmware Update Over-the-Air) can be done wirelessly.</p>
 					
-					<ol>
-					    <li>Bluetooth protocol stack</li>
-					    <li>Bootloader (with OTA DFU support)</li>
-					    <li>Application (firmware)</li>
-					</ol>
+					<p>It's also safe. So far we haven't been able to brick a single RuuviTag by updating OTA.</p>
 					
-					<p>No external programming tools or any previous knowledge are required to update the firmware. It can be done wirelessly over-the-air.</p>
-					
-					<p>It’s also safe. So far we haven’t been able to brick a single device (by using properly made distribution packages).</p>
-					
-                    <p>To perform the <strong>DFU OTA</strong> (Device Firmware Update Over-the-Air), signed distribution packages (<strong>.ZIP</strong>) have to be used. The key used to sign these packages <a href="https://github.com/ruuvi/ruuvitag_fw/tree/master/keys">is public</a>. So it’s possible to create your own packages. However, it requires some knowhow of firmware development and this isn’t covered in these simplified instructions. 
-					</p>
-					
-					<p>There’s more to come, but currently we offer two ready-made packages:</p>
-					
+                    <p><strong>OFFICIAL RUUVI DISTRIBUTION PACKAGES:</strong></p>
 					<ul>
-					    <li><a href="packages/20161230-weather-station.zip">Weather Station</a> (RuuviTag+ only)</li>
-					    <li><a href="packages/20170118-eddystone.zip">Beacon with support for Eddystone</a></li>
+					    <li><a href="packages/20161230-weather-station.zip">Weather Station</a> (default application)</li>
+					    <li><a href="packages/20170118-eddystone.zip">Eddystone</a></li>
+					    <li><a href="http://www.espruino.com/binaries/travis/master/">Espruino</a> (download the latest .ZIP file!)</li>
 					</ul>
 					
-                    <p>To update, first you need to boot into the bootloader. This can be done by keeping button <strong>B</strong> (boot) pressed while tapping button <strong>R</strong> (reset).</p>
-					
-					<p>Once you’ve succeeded, you’ll see a constant red light. Now the device is running the bootloader program and is waiting for someone to connect.</p>
-					
-					<p>Updating the firmware can be done using nRF Connect (<a href="https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp">Android</a> | <a href="https://itunes.apple.com/us/app/nrf-connect/id1054362403">iOS</a>).</p>
-					
+					<p>Updating the firmware can be done using <a href="https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp">nRF Connect</a> on Android and <a href="https://itunes.apple.com/fi/app/nrf-toolbox/id820906058">nRF Toolbox</a> on iOS.</p>
+					<p>Android:</p>
 					<div class="video">
 						<div class="video-container">
-							<iframe width="853" height="480" src="https://www.youtube.com/embed/kDv0b5Apzsg?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+							<iframe width="853" height="480" src="https://www.youtube.com/embed/ys_DJqtCIGw?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+						</div>
+                    </div>
+                    <p>iOS:</p>
+					<div class="video">
+						<div class="video-container">
+							<iframe width="853" height="480" src="https://www.youtube.com/embed/zlpYG17zqQQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
 						</div>
                     </div>
                     
-                    <p>(Actually, on this video a different (nRF Toolbox) app is used. We'll update the video soon.)</p>
-                    <p>If you’re experiencing any problems, scroll down to <a href="#troubleshooting">Troubleshooting</a> topic.</p>
+                    <p>If you're experiencing any problems, check <a href="#troubleshooting">Troubleshooting</a>.</p>
 					
 				</div>
+
 				<div id="troubleshooting" class="section">
 					<h2>Troubleshooting</h2>
 					
 					<ol>
-					    <li>My RuuviTag isn’t starting.
+					    <li>My RuuviTag isn't starting.
 					        <ol>
 					            <li>Did you remove a resist between battery and battery clip?</li>
 					        </ol>
 					    </li>
-					    <li>I can’t see any notifications.
+					    <li>I can't see any notifications.
 					        <ol>
 					            <li>Have you enabled Bluetooth and location on your phone?</li>
 					            <li>Did you follow <a href="https://google.github.io/physical-web/try-physical-web">these instructions?</a></li>
+                                <li>Check <a href="https://google.github.io/physical-web/faq">the Physical Web FAQ</a>.</li>
 					        </ol>
 					    </li>
-					    <li>I can’t enter bootloader.
+					    <li>I can't connect to the Weather Station.
 					        <ol>
-					            <li>Did you keep the boot button pressed while  you pressed the reset button? Try again.</li>
+					            <li>The Weather Station firmware isn't connectable. It broadcasts only. However, it will gain new features soon.</li>
 					        </ol>
 					    </li>
-					    <li>Your videos are poor. Why is this?
+					    <li>I can't enter the bootloader nor update the FW.
 					        <ol>
-					            <li>We are in middle of updating them. Thanks for noticing.</li>
+					            <li>Did you keep the boot button (<strong>B</strong>) pressed while you pressed the reset button? Try again.</li>
+                                <li>Are you using iOS? nRF Connect's iOS version doesn't have OTA DFU support yet. Use <a href="https://itunes.apple.com/fi/app/nrf-toolbox/id820906058">nRF Toolbox</a> instead. If still having problems, find an Android phone. We've also experienced some issues with the iOS version of the nRF Toolbox.</li>
+					        </ol>
+					    </li>
+					    <li>I cannot configure Eddystone.
+					        <ol>
+					            <li>Did you flash the correct distribution package?</li>
+					            <li>Did you press the button <strong>B</strong> to enter the configuration mode?</li>
+					            <li>Did you use the correct unlock code? The web tool expects <strong>0x</strong> before the code itself but the Android app doesn't.</li>
+					        </ol>
+					    </li>
+					    <li>I have problems with Espruino.
+					        <ol>
+                                <li><a href="https://espruino.com">Espruino</a> has its own active <a href="http://forum.espruino.com">support forum</a> where many topics are discussed.</li>
+                                <li>However, if your problem is clearly related to running Espruino <strong>on RuuviTag</strong>, please ask <a href="https://f.ruuvi.com/c/espruino">on our forum</a>. This is mainly because we don't want to increase Espruino team's workload with questions related to third-party hardware platforms.</li>
+                                <li>Check also <a href="http://www.espruino.com/Puck.js">this</a> and <a href="http://www.espruino.com/Tutorials">this</a>.</li>
 					        </ol>
 					    </li>
 					</ol>
 					
-					<p>If these troubleshooting solutions  didn’t help or you’re experiencing different problems, please feel free to ask on our <a href="https://f.ruuvi.com">forum</a>. Probably someone else is having same kind of issue(s) and our public forum can help, assist or even find better solutions for you!
+					<p>If these troubleshooting solutions  didn't help or you're experiencing different problems, please feel free to ask on our <a href="https://f.ruuvi.com">forum</a>. Probably someone else is having same kind of issue(s) and our public forum can help, assist or even find better solutions for you!
 					</p>
 				</div>
+
 				<div id="contributing" class="section">
 					<h2>Contributing</h2>
 					
-					<p>RuuviTag is an open-source project. Even the hardware is open. If you would like to contribute the ongoing projects, this is how you can do it:</p>
-					
-					<p>We have four main channels:</p>
+                    <p>RuuviTag is <strong>open-source</strong>. Even the hardware is open. If you would like to contribute the ongoing projects, this is how you can do it. We have four main channels:</p>
 					
 					<ul>
-					    <li><a href="https://github.com/ruuvi">GitHub</a></li>
-					    <li><a href="https://f.ruuvi.com">Forum</a></li>
-					    <li><a href="https://ruuvi.slack.com/">Slack</a></li>
-					    <li><a href="https://trello.com/ruuvi">Trello</a></li>
+					    <li><a href="https://github.com/ruuvi">GitHub</a>
+                            <ul><li>Where all the software and hardware files can be found.</li></ul>
+                        </li>
+					    <li><a href="https://f.ruuvi.com">Forum</a>
+                            <ul><li>A place where questions can be easily asked. You can also showcase your own project!</li></ul>
+                        </li>
+					    <li><a href="https://ruuvi.slack.com/">Slack</a>
+                            <ul><li>The team is for real time discussion and is invite only. Everyone is welcome, but you need to request an invite by sending an informal email to <a href="mailto:slack@ruuvi.com">slack@ruuvi.com</a>.</li></ul>
+                        </li>
+					    <li><a href="https://trello.com/ruuvi">Trello</a>
+                            <ul><li>A simple TODO list for the firmware development.</li></ul>
+                        </li>
 					</ul>
-					
-					<p>All the software and hardware files can be found on GitHub. Our organization is called Ruuvi.
-					</p>
-					
-					<p>Our forum is a place where questions can be easily asked.</p>
-					
-					<p>Ruuvi’s Slack team is for real time discussion. The team is invite only. Everyone is welcome, but you need to request an invite by sending an informal email to <a href="mailto:slack@ruuvi.com">slack@ruuvi.com</a>.</p>
-					
-					<p>Ruuvi’s Trello is a simple TODO list for the firmware development. By checking this list, you can easily to see if there are something you could help with.
-					</p>
 					
 					<p>To help, these are sample paths that can be followed:</p>
 					
@@ -260,7 +284,7 @@
 					
 					<ol>
 					    <li>Build something using RuuviTags (it can be anything!)</li>
-					    <li>Showcase it on the forum (or on Slack)</li>
+                        <li>Showcase it on the forum</li>
 					    <li>See what happens</li>
 					</ol>
 					
@@ -268,7 +292,7 @@
 					
 					<ol>
 					    <li>Find a bug on GitHub</li>
-					    <li>Make a pull request</li>
+					    <li>Create an issue or even better: fix it and make a pull request</li>
 					</ol>
 					
 					
@@ -278,7 +302,7 @@
 	</div>
 	<div class="footer">
 		<h5 class="copy">Ruuvi Innovations Ltd.</h5>
-		<p>Document version 0.1 - 30th December 2016</p>
+		<p>Document version 1.1 - 7th April 2017</p>
 	</div>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
