@@ -1,7 +1,7 @@
 <!doctype html>
 <html><!--     this is          ruu.vi/index.html invoked from Chrome extension or Physical Web Beacons by swipe down, then tap.
-      sample invocation https://ruu.vi#AIgbAMLNs   where  the fragment:'AIgbAMLNs' is the format and th  encoded Temperature, Humidity, airPressure
-         revised version 2017/04/27    BIgbAMLNsr               r is beacon ID             -->
+      sample invocation https://ruu.vi#AIgbAMLN   where  the fragment:'AIgbAMLNs' is the format and th  encoded Temperature, Humidity, airPressure
+         revised version 2017/04/27    BIgbAMLNr               r is beacon ID             -->
 <head>
 	<meta charset="UTF-8">
 	<link href='https://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
@@ -79,7 +79,7 @@
                  var tempSign = (decoded64[2] >> 7) & 1;
                  temp = tempSign === 0 ? uTemp/256.0 : -1 * uTemp/256.0;
                  air_pressure = ((decoded64[4] << 8) + decoded64[5]) + 50000;
-                 if (variables[0] == 'B' ) { beaconID = variables[9]; beaconIDli.style.visibility='visible'; console.log("beaconID = " + beaconID); }
+                 if (variables[0] == 'B' ) { beaconID = variables[8]; beaconIDli.style.visibility='visible'; console.log("beaconID = " + beaconID); }
                           // example: BIgbAMLNsN 27/81 C/F 68%  999Pa ID=N
               }
 
