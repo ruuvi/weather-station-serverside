@@ -1,6 +1,5 @@
-<!-- version 1.10 B   add beacon, drop upppercase-->
-html, body, div, span, h1, h3, p, ul, li, header 
-    {margin:0; padding:0; border:0; font-size:100%; font:inherit; vertical-align:baseline; outline:none;}
+/* version 1.10 B   add beacon, drop upppercase */
+html, body, div, span, h1, h3, p, ul, li, header  {margin:0; padding:0; border:0; font-size:100%; font:inherit; vertical-align:baseline; outline:none;}
 
 html {font-size:62.5%;} 
 
