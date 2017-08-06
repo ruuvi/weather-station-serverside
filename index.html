@@ -1,7 +1,7 @@
 <!doctype html>
 <html><!--     this is          ruu.vi/index.html invoked from Chrome extension or Physical Web Beacons by swipe down, then tap.
-      sample invocation https://ruu.vi#AIgbAMLN   where  the fragment:'AIgbAMLNs' is the format and th  encoded Temperature, Humidity, airPressure
-         revised version 2017/04/27    BIgbAMLNr               r is beacon ID             -->
+ Sample invocation https://ruu.vi#BIgbAMLNr   r is beaconid as added 2017/04/27
+                                  AIgbAMLN  where the fragment:'AIgbAMLN is the format & the  encoded Temperature, Humidity, airPressure --> 
 <head>
 	<meta charset="UTF-8">
 	<link href='https://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
@@ -11,7 +11,9 @@
 	<meta name="format-detection" content="telephone=no">
 	<title>Ruuvi Weather Station</title>
 	<meta name="author" content="Ruuvi Innovations Ltd">
-    <meta name="version" content='1.1.0'><!-- extract base91 to seperate .js ; reduce top area for landscape viewing;  add beacon ID-->
+    <meta name="version" content='1.1.1'>
+        <!-- 1.1.1 display beacon as integer -->
+        <!-- 1.1.0 extract base91 to seperate .js ; reduce top area for landscape viewing;  add beacon ID-->
 	<meta name="description" content="Open the link to see the measurements" />
 	<meta name="keywords" content="" />
 	<link rel="shortcut icon" href="images/favicon.ico">
@@ -79,8 +81,9 @@
                  var tempSign = (decoded64[2] >> 7) & 1;
                  temp = tempSign === 0 ? uTemp/256.0 : -1 * uTemp/256.0;
                  air_pressure = ((decoded64[4] << 8) + decoded64[5]) + 50000;
-                 if (variables[0] == 'B' ) { beaconID = variables[8]; beaconIDli.style.visibility='visible'; console.log("beaconID = " + beaconID); }
-                          // example: BIgbAMLNsN 27/81 C/F 68%  999Pa ID=N
+                 if (variables[0] == 'B' ) { beaconID =     variables.charCodeAt(8)                   // r = 114
+                                             beaconIDli.style.visibility='visible'; console.log("beaconID = " + beaconID); }
+                          // example: BIgbAMLNsr 27/81 C/F 68%  999Pa ID=114
               }
 
              let temperatureEl = document.querySelector("#temperature");
