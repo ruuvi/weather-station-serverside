@@ -245,7 +245,7 @@ p span {
 a.tag-available,
 a.tag-available:visited {
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 40px auto;
   width: 150px;
   height: 40px;
   background: url(../svg/fallback/now-available.png) center center no-repeat;
@@ -341,11 +341,11 @@ a.tag-available:hover {
   background: url(../svg/fallback/icon-time.png) 22px center no-repeat;
   background-image: url(../svg/icon-time.svg), none;
 }
-.beaconID {
-  background:url(../svg/fallback/icon-beacon.png )      20px center no-repeat; 
-  background-image:url(../svg/icon-beacon.svg),       none;
-}
 .altitude {
   background: url(../svg/fallback/icon-altitude.png) 20px center no-repeat;
   background-image: url(../svg/icon-altitude.svg), none;
+}
+.beacon-id {
+  background: url(../svg/fallback/icon-beacon-id.png) 23px center no-repeat;
+  background-image: url(../svg/icon-beacon-id.svg), none;
 }
