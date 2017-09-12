@@ -83,7 +83,7 @@
                  temp = tempSign === 0 ? uTemp/256.0 : -1 * uTemp/256.0;
                  air_pressure = ((decoded64[4] << 8) + decoded64[5]) + 50000;
                  if (variables[0] == 'B' ) { beaconID =    variables.charCodeAt(8)                   // r = 114 
-					     beaconIDli.style.display='block'; console.log("beaconID = " + beaconID); }
+					     beaconIDli.style.display=''; console.log("beaconID = " + beaconID); }
                           // example: BIgbAMLNsr 27/81 C/F 68%  999Pa ID=114
               }
 
@@ -143,7 +143,7 @@
 					<div class="measurement"><h3 id="air_pressure"></h3></div>
 					<div class="info"><p>Air pressure<span>hPa</span></p></div>
 				</li>
-				<li class="beaconID" id=beaconIDli style=display:none>
+				<li class="beacon-id" id=beaconIDli style="display:none">
 					<div class="measurement"><h3 id="beaconID"></h3></div>
 					<div class="info"><p>Beacon<span>ID</span></p></div>
 				</li>
