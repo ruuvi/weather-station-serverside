@@ -11,8 +11,9 @@
 	<meta name="format-detection" content="telephone=no">
 	<title>Ruuvi Weather Station</title>
 	<meta name="author" content="Ruuvi Innovations Ltd">
-        <meta name="version" content='1.1.2'>
-     <!-- 1.1.2 Style fixes -->
+        <meta name="version" content='1.1.3'>
+	<!-- 1.1.3 add incliude -->
+        <!-- 1.1.2 Style fixes -->
 	 <!-- 1.1.1 display beacon in integer -->
 	 <!-- 1.1.0 extract base91 to seperate .js ; reduce top area for landscape viewing;  add beacon ID-->
 	<meta name="description" content="Open the link to see the measurements" />
