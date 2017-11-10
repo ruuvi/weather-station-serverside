@@ -9,8 +9,9 @@
     <meta name=HandheldFriendly content=true>
     <meta name=format-detection content="telephone=no">
     <meta name=author content="Ruuvi Innovations Ltd and others"> <meta name=
- version content="1.8.0 -1">
- <!-- This version (1.8.0 -1) is intended to get format 8 up since changing this web page is easy but changing the firmware is hard 
+ version content="1.8.0 -1.1">
+ <!-- This version (1.8.0 -1.1)  -1.1 fix backgroundimage and config size and send probers to ftc.go
+      is intended to get format 8 up since changing this web page is easy but changing the firmware is hard 
      the are many features still todo, but at least this provides the same funtionallity as existing with 2 byte ID DGG --> 
      <!-- 1.8.0 process format 8.  '#' no longer used,  2 byte ID see MyBeacons.info/packetFormats 
                 ditch format 3 support it never came here anyway   ditch seperate style file
@@ -66,7 +67,8 @@ IDformat = getCookieValue('i')
     // See ruuvi packformats.html
     // We do a sanity check on the payload in case it's an evil prober like looking for  php admin..
     // first character is the encoded 6 bits (conviently excludes battery status)
-        //if ( payload[0]  != 'C'  ) { window.location='https://ruu.vi'; }   // out we go        +++++   comment this out for local testing
+    if ( payload[0]  != 'C'  ) { window.location='https://ftc.gov'; }   // 
+
 
         var decoded64 = base64_decode(payload); console.log("64 : " + decoded64); 
 
@@ -103,7 +105,7 @@ IDformat = getCookieValue('i')
                                 } 
 function settings(){
 window.open
- ('config.html', 'config', 'height=400,width=600,top=40,left=40,location="no",scrollbars="no",toolbar="no",menunar="no"') 
+ ('config.html', 'config', 'height=700,width=600,top=40,left=40,location="no",scrollbars="no",toolbar="no",menunar="no"') 
 }
 
 function info(){
@@ -121,9 +123,10 @@ window.open
 span.bigger {font-size:200%}
 span.big    {font-size:180%}
 
-body { background-image: url("images/bg.jpg"); background-color: tan; }
 </style> 
-<!--    not needed
+<!--    not used
+body { background-image: url("images/bg.jpg"); background-color: tan; }
+
 body { background: url(images/bg.jpg) ; background-size: cover; background-attachment: fixed;} 
 @media (min-width: 400px) { body {background: url(images/bg.jpg) no-repeat; background-size: cover; background-attachment: fixed;}
 @media (min-width: 700px) { }
@@ -134,7 +137,7 @@ body { background: url(images/bg.jpg) ; background-size: cover; background-attac
 
 <!-- start with a background color, then a minimal image, then ,onload, make it nice.   onload background.src=images/bg.jpg  (_) todo
         Browsers won't load from users local so testing must be done from server -->
-<body style=font-family:sans-serif;font-weight:200%;color:white; topmargin=0  
+<body style=font-family:sans-serif;background:url(images/bg.jpg);background-size:cover;background-color:tan;color:white; topmargin=0  
       onload="parseAndDisplayData();" > 
 
 <table width=100% style=margin:0;border-style:solid cellspacing=0 cellpadding=0 border=0>
