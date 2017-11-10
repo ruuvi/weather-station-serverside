@@ -1,4 +1,4 @@
-<!doctype html> <html> <!-- view this at  http://myBeacons.info/C8OZAB4AA click on configuration -->
+<!doctype html> <html> 
 
 <head>
 	<title>                         ruuvi configuration for Environment Station                   </title>
@@ -42,17 +42,17 @@ function saveCookies(){
 
 </head>
 
-<body  bgcolor=tan style=font-family:sans-serif;color:gray> 
-<center>
-<span style=color:black>This function will be available soon.</span>
-</center>
+<body  bgcolor=tan style=font-family:sans-serif; topmargin=0>
 <br>
 <center><big style=font-size:150%;color:white><b>ruuvi tag configuration</b></big></center>
 </span><br>
+<center>
+<span style=color:black>This function will be available soon.</span>
+</center>
 
 
 
- <form onSubmit='return saveCookies(this);'>       
+ <form onSubmit='return saveCookies(this);' style=color:gray>
 <b>Temperature:</b>  Celsius&middot;<input type=radio  checked name=temperature> Fahrenheit&middot;<input type=radio name=temperature><br>
 
 <b>Humidity</b>&middot;<input type=checkbox name=humidity checked> 
@@ -67,8 +67,13 @@ omit&middot;<input type=radio name=pressure value=pomit>&nbsp;
 <!-- <<small>(If not checked the item will not be displayed.)</small><br>  -->
 
 <table cellpadding=0 cellspacing=0 border=0>
-<tr><td rowspan=3 valign=top> <b>Tag ID:&nbsp; </b><td align=left>&nbsp;&nbsp;&nbsp;<small><small>(Hex)</small></small><td align=left>&nbsp;<small><small>(Decimal)</small></small> 
-<tr><td> <b>34:ED</b>&middot;<input type=radio name=IDfmt value=hex> &nbsp; or&nbsp; <td> <b>16503</b>&middot;<input type=radio name=IDfmt value=dec checked> 
+<tr><td rowspan=3 valign=center> <b>Tag ID</b>
+    <td valign=bottom align=center><small>Hex</small>
+    <td align=center valign=bottom><small>Decimal</small></small> 
+    <td align=center><small>WYS (What Your See from widget)</small></small> 
+<tr><td> 34:ED</b>&middot;<input type=radio name=IDfmt value=hex>
+    <td> 16503</b>&middot;<input type=radio name=IDfmt value=dec >  
+    <td> hRwZi</b>&middot;<input type=radio name=IDfmt value=wys checked> 
 <tr><td colspan=2><nobr> or Name&middot;<input name=ID_name value='attic' size=10>
 </table>
 
@@ -105,6 +110,8 @@ Comments about this site <input name=comments size=40>
 <center> <input type=submit></center>
 
 	</form>
+
+
 
 <p>
 <center><img src=images/favicon.ico></center><p>
