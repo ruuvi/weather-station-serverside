@@ -2,6 +2,9 @@ const CACHE_NAME = 'ruuvi_weather_station_v1';
 
 const urlsToCache = [
     './',
+    './404.shtml',
+    './info.html',
+    './config.html',
     './sw.js',
     './css/ruu-vi-styles.css',
     './js/base64.js',

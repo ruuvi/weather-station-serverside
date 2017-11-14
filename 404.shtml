@@ -1,0 +1,188 @@
+<!doctype html> <html><!-- This is    ruu.vi/404.html   invoked by Apache   
+            on iPhone from Physical Web Beacons widget by swipe right, then tap.
+            on Android ...  
+  Sample invocation https://ruu.vi/COZAB4AA   http://mybeacons.info/C8OdarXadddd    for testing  -->
+<head>
+    <title>                         ruuvi Environment Station                   </title>
+    <meta charset=UTF-8>   
+    <meta name=viewport content="width=device-width">
+    <meta name=HandheldFriendly content=true>
+    <meta name=format-detection content="telephone=no">
+    <meta name=author content="Ruuvi Innovations Ltd and others"> <meta name=
+ version content="1.8.0 -1.1">
+ <!-- This version (1.8.0 -1.1)  -1.1 fix backgroundimage and config size and send probers to ftc.go
+      is intended to get format 8 up since changing this web page is easy but changing the firmware is hard 
+     the are many features still todo, but at least this provides the same funtionallity as existing with 2 byte ID DGG --> 
+     <!-- 1.8.0 process format 8.  '#' no longer used,  2 byte ID see MyBeacons.info/packetFormats 
+                ditch format 3 support it never came here anyway   ditch seperate style file
+                totally reformat display, ditch titles for measurments, 
+          todo  add configuration and their cookies and assorted additional stuff and history page  -->
+     <!-- 1.1.2 Style fixes -->
+     <!-- 1.1.1 display beacon in integer -->
+     <!-- 1.1.0 extract base91 to seperate .js ; reduce top area for landscape viewing;  add beacon ID -->
+    <meta name=description content="Open the link to see the measurements" /> <!-- used by widget? -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+<script> 
+  // Some browsers will do better caching if we ask them 
+  if ('serviceWorker' in navigator) {
+       navigator.serviceWorker.register('./sw.js').then(function(registration) {
+       console.log('Registration completed.', registration.scope);             }).catch(function(err) {
+       console.log('Registration unsuccessful, no worries.', err);                                                   }  );
+                                        }
+// cookies may be used to save users preferences (might get wipe out )(or need a database to do it
+function getCookieValue(name) {
+  var firstChar, lastChar;
+  var CookieString = document.cookie;                   // make it a string
+  firstChar = CookieString.indexOf(name);               // find the name
+  if(firstChar = -1) {   return false; } ;              // name not found   out ==>
+    firstChar += name.length + 1;                       // pass over the '='
+    lastChar = CookieString.indexOf(";", firstChar);    // value is everything up to the ';'
+    if(lastChar == -1) lastChar = CookieString.length;   // no ending ';' it must be the last n=v pair,
+    return CookieString.substring(firstChar, lastChar);  // return only the value
+                                } 
+// start by getting the cookies from last time (if there was a last time) and set up screen as per user settings
+temperatureScale = getCookieValue('t'); 
+// set up temperature as per user settings   if ( temperatureScale == 'f' ) { dont show C }  (_) todo
+
+pressureScale = getCookieValue('p');    
+// set up temperature as per user settings     if ( pressureScale ==  'm' ) { convert to requested units mmHg/ kpa..}(_) todo
+
+IDformat = getCookieValue('i')           
+// set up temperature as per user settings; if( IDformat == 'x') { show ID in hex } (_) todo
+// background ...
+// fontColor
+// background
+// helpful hints. (wear a jacket, a coat, a raincoat...
+
+</script> 
+
+<script src="js/base64.js"></script>
+
+<script type="text/javascript">                          
+    // This is the 404 handler and not accessed with '#' formats. There is no need to handle any packets of format type less than 08
+
+ function parseAndDisplayData() {   // https://ruu.vi/C......  
+        payload=window.location.pathname.substr(1);  // skip over the slash
+    // See ruuvi packformats.html
+    // We do a sanity check on the payload in case it's an evil prober like looking for  php admin..
+    // first character is the encoded 6 bits (conviently excludes battery status)
+    if ( payload[0]  != 'C'  ) { window.location='https://ftc.gov'; }   // 
+
+
+        var decoded64 = base64_decode(payload); console.log("64 : " + decoded64); 
+
+    // error values: humidity = 60; temp = 124; air_pressure = 62;  
+    // C8OZAB4AA   11,195, 153, 0, 30,0,0,0    0B 8+3 battery   ID=1B1D h=0 t=30-30=0 p=0 yuck  (_) get a better example  todo
+    //              0   1    2  3  4
+        batteryStatus =   decoded64[0] & 0x03 ;
+        beaconID      =  (decoded64[1] << 8   ) + decoded64[2] ;
+        humidity      =  (decoded64[3] & 0x3F ) * 2;
+        temperature   =  (decoded64[4] & 0x7F ) - 30;
+        air_pressure  =  (decoded64[5] >> 2   ) + 950;
+        dp_priorCode  =  (decoded64[5] & 0X3F ); //  falling/rising...          (_)  todo
+        movement      =   decoded64[6] ;                     //(_)  ?  todo
+
+        beaconIDEL     = document.querySelector("#beaconID");
+        humidityEl     = document.querySelector("#humidity");
+        temperatureFEl = document.querySelector("#temperatureF");
+        temperatureCEl = document.querySelector("#temperatureC");
+        airPressureEl  = document.querySelector("#air_pressure");
+
+        beaconIDEL.innerText     = beaconID;                                              // 1B:1D
+        humidityEl.innerText     = humidity;                                              // %
+        temperatureFEl.innerText = Math.round(  (temperature * 9)/5 + 32);                // F
+        temperatureCEl.innerText = temperature ;                                          // C
+        airPressureEl.innerText = air_pressure;                                           //  hPa
+
+  // now that we're all finished  post stats to google
+  (function(i,s,o,g,r,a,m){ i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
+    a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+    a.async=1;a.src=g;m.parentNode.insertBefore(a,m) }
+   )(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); 
+  ga('create', 'UA-89454732-1', 'auto'); ga('send', 'pageview'); 
+                                } 
+function settings(){
+window.open
+ ('config.html', 'config', 'height=700,width=600,top=40,left=40,location="no",scrollbars="no",toolbar="no",menunar="no"') 
+}
+
+function info(){
+window.open
+ ('info.html', 'info', 'height=400,width=600,top=40,left=40,location="no",scrollbars="no",toolbar="no",menunar="no"') 
+}
+
+</script>
+<!-- was  body {font-family: 'Oswald', sans-serif; font-size: 16px; font-size: 1.6rem;
+        line-height: 24px; line-height: 2.4rem; font-weight: 300; color: #fff;
+        background: url(../images/bg-m.jpg) no-repeat; background-size: cover; background-attachment: fixed;}
+  -->
+<style>
+
+span.bigger {font-size:200%}
+span.big    {font-size:180%}
+
+</style> 
+<!--    not used
+body { background-image: url("images/bg.jpg"); background-color: tan; }
+
+body { background: url(images/bg.jpg) ; background-size: cover; background-attachment: fixed;} 
+@media (min-width: 400px) { body {background: url(images/bg.jpg) no-repeat; background-size: cover; background-attachment: fixed;}
+@media (min-width: 700px) { }
+.branding {width: 160px; height: 33px; margin: 40px auto 0 auto; background: url(../svg/fallback/ruuvi-logo.png) center center no-repeat;
+                background-image: url(svg/ruuvi-logo.svg), none; text-indent: -9999px;} 
+-->
+</head>
+
+<!-- start with a background color, then a minimal image, then ,onload, make it nice.   onload background.src=images/bg.jpg  (_) todo
+        Browsers won't load from users local so testing must be done from server -->
+<body style=font-family:sans-serif;background:url(images/bg.jpg);background-size:cover;background-color:tan;color:white; topmargin=0  
+      onload="parseAndDisplayData();" > 
+
+<table width=100% style=margin:0;border-style:solid cellspacing=0 cellpadding=0 border=0>
+<tr>
+    <td align=left width=30% valign=top>           <!-- cursor and title don't show on iPhone anyway -->
+        &nbsp;<input type=button value='&#x2699;' onClick="settings();" >
+
+   <td align=center width=30% valign=top><span class=bigger><b>Environment Status</b></span>
+   <td align=right  width=30% valign=top>
+        <input type=button value=&#x2753;  onClick="info();" >&nbsp;</form>
+</table>
+
+<table width=100% border=0 style=border-style:solid cellspacing=0 cellpadding=0>
+<tr>
+    <td width=30% align=center> <span class=bigger id=temperatureF > </span><span class=bigger>&deg;C</span><br>
+    <!-- <td width=30% align=center>--> 
+    <span class=bigger id=temperatureC > </span><span class=bigger>&deg;F</span>
+    <td width=30% class=humidity align=center>     <span class=bigger id=humidity>     </span><span class=bigger>%</span>
+    <td width=30% class=air-pressure align=center> <nobr><span class=bigger id=air_pressure> </span>  <span class=big>hPa </span> </nobr>
+                                                                      <!-- todo (_)  trend rising / falling 261D   or  27b4 ^ -->
+ <!-- todo (_) <tr><td align=center colspan=9>Feels like it'll rain soon. <big>&#x2602;</big> -->
+<tr>
+ <!--  <td  align=center>   todo (_) last updated 1:28PM -->
+ <td colspan=3 style=vertical-align:middle; align=center class=beacon-id id=beaconIDli  colspan=2>Beacon ID &nbsp;<span class=big id=beaconID> </span><br>
+<!-- do not reformat the following lines as they cause a line break in the browser just as they do here -->
+  <span class=small><a href="https://lab.ruuvi.com/weather-station#what-is-id" style="color:white;cursor:help" title="The ID of the tag.
+Nearly unique
+(chance of duplicate:1 in 65,000 )" ;><small>(What is this?)</small></a>
+</table>
+
+<p>
+
+<center>
+ <a href="http://ruuvi.com/" style=color:white;font-weight:200;text-decoration:none; align=center>
+<img src=svg/fallback/ruuvi-logo.png><br clear=all>
+Ruuvi Innovations Ltd</a> 
+
+<!--#include virtual="webmasterNote.html" -->    <!-- Let webmaster add something without modifying this. -->
+
+</body>
+
+
+
+
+<!--
+/* vim: set columns=140: */
+ -->
+</html>
