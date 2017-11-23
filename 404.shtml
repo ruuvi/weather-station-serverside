@@ -42,14 +42,12 @@ function getCookieValue(name) {
     return CookieString.substring(firstChar, lastChar);  // return only the value
                                 } 
 // start by getting the cookies from last time (if there was a last time) and set up screen as per user settings
-temperatureScale = getCookieValue('t'); 
-// set up temperature as per user settings   if ( temperatureScale == 'f' ) { dont show C }  (_) todo
 
 pressureScale = getCookieValue('p');    
 // set up temperature as per user settings     if ( pressureScale ==  'm' ) { convert to requested units mmHg/ kpa..}(_) todo
 
 IDformat = getCookieValue('i')           
-// set up temperature as per user settings; if( IDformat == 'x') { show ID in hex } (_) todo
+     dewpointShow =  getCookieValue('dp')
 // background ...
 // fontColor
 // background
@@ -63,19 +61,18 @@ IDformat = getCookieValue('i')
     // This is the 404 handler and not accessed with '#' formats. There is no need to handle any packets of format type less than 08
 
  function parseAndDisplayData() {   // https://ruu.vi/C......  
-        payload=window.location.pathname.substr(1);  // skip over the slash
+        payload=window.location.pathname.substr(1);  // skip over the slash of any domain name.
     // See ruuvi packformats.html
     // We do a sanity check on the payload in case it's an evil prober like looking for  php admin..
     // first character is the encoded 6 bits (conviently excludes battery status)
-    if ( payload[0]  != 'C'  ) { window.location='https://ftc.gov'; }   // 
-
+    if ( payload[0]  != 'C'  ) { window.location='https://ftc.gov'; }   //   send them somewhere rude!  
 
         var decoded64 = base64_decode(payload); console.log("64 : " + decoded64); 
 
-    // error values: humidity = 60; temp = 124; air_pressure = 62;  
+    // Error values: humidity = 60; temp = 124; air_pressure = 62;  
     // C8OZAB4AA   11,195, 153, 0, 30,0,0,0    0B 8+3 battery   ID=1B1D h=0 t=30-30=0 p=0 yuck  (_) get a better example  todo
     //              0   1    2  3  4
-        batteryStatus =   decoded64[0] & 0x03 ;
+        batteryStatus =   decoded64[0] & 0x03 ;                      // see myBeacons.info/packetFormats.html
         beaconID      =  (decoded64[1] << 8   ) + decoded64[2] ;
         humidity      =  (decoded64[3] & 0x3F ) * 2;
         temperature   =  (decoded64[4] & 0x7F ) - 30;
@@ -85,15 +82,25 @@ IDformat = getCookieValue('i')
 
         beaconIDEL     = document.querySelector("#beaconID");
         humidityEl     = document.querySelector("#humidity");
-        temperatureFEl = document.querySelector("#temperatureF");
-        temperatureCEl = document.querySelector("#temperatureC");
+        dewpointEl     = document.querySelector("#dewpoint");
         airPressureEl  = document.querySelector("#air_pressure");
 
+// if( IDformat == 'x') { show ID in hex ie MAC  1B:1D} 
+// if( IDformat == 'd') { show ID in decimal
         beaconIDEL.innerText     = beaconID;                                              // 1B:1D
         humidityEl.innerText     = humidity;                                              // %
-        temperatureFEl.innerText = Math.round(  (temperature * 9)/5 + 32);                // F
-        temperatureCEl.innerText = temperature ;                                          // C
+//        if( dewpointShow ) {dewpoint.style.display='';  dewpoint=   temperature - ((100 - humidity)/5)   };
+
+       if ( getCookieValue('C') == 'y'    || !getCookieValue('C') ) {                                           // cannot use &deg;
+        temperatureCEl = document.querySelector("#temperatureC");
+        temperatureC.style.display=''; temperatureCEl.innerText = temperature;                         temperatureCEl.innerText+= "°C ";  }
+       if ( getCookieValue('F') == 'y'    || !getCookieValue('F') ) {
+        temperatureFEl = document.querySelector("#temperatureF");
+        temperatureF.style.display=''; temperatureFEl.innerText = Math.round(((temperature *9)/5)+32); temperatureFEl.innerText+= "°F ";  }
+
         airPressureEl.innerText = air_pressure;                                           //  hPa
+
+
 
   // now that we're all finished  post stats to google
   (function(i,s,o,g,r,a,m){ i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -152,13 +159,18 @@ body { background: url(images/bg.jpg) ; background-size: cover; background-attac
 
 <table width=100% border=0 style=border-style:solid cellspacing=0 cellpadding=0>
 <tr>
-    <td width=30% align=center> <span class=bigger id=temperatureF > </span><span class=bigger>&deg;C</span><br>
-    <!-- <td width=30% align=center>--> 
-    <span class=bigger id=temperatureC > </span><span class=bigger>&deg;F</span>
+    <td width=30% align=center> 
+    <span class=bigger id=temperatureC style=display:none > </span>
+    <span class=bigger id=temperatureF style=display:none > </span>
+    <span class=bigger id=dewpoint style=display:none    > </span>
+
     <td width=30% class=humidity align=center>     <span class=bigger id=humidity>     </span><span class=bigger>%</span>
+
     <td width=30% class=air-pressure align=center> <nobr><span class=bigger id=air_pressure> </span>  <span class=big>hPa </span> </nobr>
                                                                       <!-- todo (_)  trend rising / falling 261D   or  27b4 ^ -->
  <!-- todo (_) <tr><td align=center colspan=9>Feels like it'll rain soon. <big>&#x2602;</big> -->
+
+
 <tr>
  <!--  <td  align=center>   todo (_) last updated 1:28PM -->
  <td colspan=3 style=vertical-align:middle; align=center class=beacon-id id=beaconIDli  colspan=2>Beacon ID &nbsp;<span class=big id=beaconID> </span><br>
